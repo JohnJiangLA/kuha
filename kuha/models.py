@@ -6,15 +6,16 @@ import sqlalchemy as sa
 import sqlalchemy.orm as orm
 from sqlalchemy.ext.declarative import declarative_base
 import transaction
-from zope.sqlalchemy import ZopeTransactionExtension
+# from zope.sqlalchemy import ZopeTransactionExtension
+from zope.sqlalchemy import register
 
 from .util import datestamp_now
 
 _Base = declarative_base()
 DBSession = orm.scoped_session(orm.sessionmaker(
-    extension=ZopeTransactionExtension()
+#    extension=ZopeTransactionExtension()
 ))
-
+register(DBSession)
 
 class _CreateMixin(object):
 
